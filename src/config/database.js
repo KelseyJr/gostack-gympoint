@@ -7,6 +7,7 @@ module.exports = {
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   storage: './__tests__/database.sqlite',
+  logging: process.env.NODE_ENV !== 'test',
   define: {
     timestamps: true, // created_at e updated_at
     underscored: true, // Model=UserGroup - table=user_groups (tabela)
