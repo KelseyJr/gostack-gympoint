@@ -1,4 +1,4 @@
-import { resolve } from 'util';
+const { resolve } = require('path');
 
 module.exports = {
   config: resolve(__dirname, 'src', 'config', 'database.js'),
