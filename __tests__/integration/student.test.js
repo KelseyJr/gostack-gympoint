@@ -77,12 +77,8 @@ describe('Update student', () => {
       .put('/students')
       .set('Authorization', `Bearer ${user.generateToken()}`)
       .send({
-        id: student.id,
+        ...student.dataValues,
         name: 'Kelsey Junior',
-        email: student.email,
-        age: student.age,
-        weight: student.weight,
-        height: student.height,
       });
 
     expect(response.status).toBe(200);
@@ -95,12 +91,8 @@ describe('Update student', () => {
     const response = await request(app)
       .put('/students')
       .send({
-        id: student.id,
+        ...student.dataValues,
         name: 'Kelsey Junior',
-        email: student.email,
-        age: student.age,
-        weight: student.weight,
-        height: student.height,
       });
 
     expect(response.status).toBe(401);
@@ -114,12 +106,8 @@ describe('Update student', () => {
       .put('/students')
       .set('Authorization', `Bearer 123456`)
       .send({
-        id: student.id,
+        ...student.dataValues,
         name: 'Kelsey Junior',
-        email: student.email,
-        age: student.age,
-        weight: student.weight,
-        height: student.height,
       });
 
     expect(response.status).toBe(401);
@@ -139,12 +127,8 @@ describe('Update student', () => {
       .put('/students')
       .set('Authorization', `Bearer ${user.generateToken()}`)
       .send({
-        id: student1.id,
-        name: student1.name,
-        email: student2.email,
-        age: student1.age,
-        weight: student1.weight,
-        height: student1.height,
+        ...student1.dataValues,
+        email: student2.dataValues.email,
       });
 
     expect(response.status).toBe(400);
