@@ -1,11 +1,10 @@
 import request from 'supertest';
-import bcrypt from 'bcryptjs';
 import app from '../../src/app';
 
 import factory from '../factories';
 import truncate from '../util/truncate';
 
-describe('User', () => {
+describe('Create user', () => {
   beforeEach(async () => {
     await truncate();
   });
@@ -31,6 +30,5 @@ describe('User', () => {
       .send(user);
 
     expect(response.status).toBe(400);
-    expect(response.body).toMatchObject({ error: 'Duplicated email' });
   });
 });
