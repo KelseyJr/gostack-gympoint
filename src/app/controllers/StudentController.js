@@ -25,7 +25,8 @@ class StudentController {
       return res.status(400).json({ error: 'Validation fails' });
     }
 
-    const { id, email } = req.body;
+    const { id } = req.params;
+    const { email } = req.body;
 
     const student = await Student.findByPk(id);
     if (student.email !== email) {

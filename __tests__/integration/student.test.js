@@ -74,7 +74,7 @@ describe('Update student', () => {
     const student = await factory.create('Student');
 
     const response = await request(app)
-      .put('/students')
+      .put(`/students/${student.dataValues.id}`)
       .set('Authorization', `Bearer ${user.generateToken()}`)
       .send({
         ...student.dataValues,
@@ -89,7 +89,7 @@ describe('Update student', () => {
     const student = await factory.create('Student');
 
     const response = await request(app)
-      .put('/students')
+      .put(`/students/${student.dataValues.id}`)
       .send({
         ...student.dataValues,
         name: 'Kelsey Junior',
@@ -103,7 +103,7 @@ describe('Update student', () => {
     const student = await factory.create('Student');
 
     const response = await request(app)
-      .put('/students')
+      .put(`/students/${student.dataValues.id}`)
       .set('Authorization', `Bearer 123456`)
       .send({
         ...student.dataValues,
@@ -124,7 +124,7 @@ describe('Update student', () => {
     });
 
     const response = await request(app)
-      .put('/students')
+      .put(`/students/${student1.dataValues.id}`)
       .set('Authorization', `Bearer ${user.generateToken()}`)
       .send({
         ...student1.dataValues,
