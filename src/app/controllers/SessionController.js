@@ -1,13 +1,7 @@
 import User from '../models/User';
 
-import sessionValidation from '../validations/SessionValidation';
-
 class SessionController {
   async store(req, res) {
-    if (!(await sessionValidation.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-
     const { email, password } = req.body;
     const user = await User.findOne({ where: { email } });
 

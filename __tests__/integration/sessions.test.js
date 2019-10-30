@@ -23,13 +23,13 @@ describe('Authentication', () => {
 
   it('should not authenticate with invalid password', async () => {
     const user = await factory.create('User', {
-      password: '123',
+      password: '1234567',
     });
     const response = await request(app)
       .post('/sessions')
       .send({
         email: user.email,
-        password: '1234',
+        password: '123456',
       });
 
     expect(response.status).toBe(401);
@@ -60,5 +60,17 @@ describe('Authentication', () => {
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('token');
+  });
+
+  it('should not be authenticated when required data is missing', async () => {
+    const response = await request(app)
+      .post('/sessions')
+      .send();
+
+    expect(response.status).toBe(400);
+    expect(response.body.messages[0].message).toBe('email is a required field');
+    expect(response.body.messages[1].message).toBe(
+      'password is a required field'
+    );
   });
 });

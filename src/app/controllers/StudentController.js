@@ -1,13 +1,7 @@
 import Student from '../models/Student';
 
-import studentValidation from '../validations/StudentValidation';
-
 class StudentController {
   async store(req, res) {
-    if (!(await studentValidation.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-
     const { email } = req.body;
 
     const checkEmail = await Student.findOne({ where: { email } });
@@ -21,10 +15,6 @@ class StudentController {
   }
 
   async update(req, res) {
-    if (!(await studentValidation.isValid(req.body))) {
-      return res.status(400).json({ error: 'Validation fails' });
-    }
-
     const { id } = req.params;
     const { email } = req.body;
 

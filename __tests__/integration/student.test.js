@@ -62,6 +62,34 @@ describe('Create student', () => {
     expect(response.status).toBe(400);
     expect(response.body).toMatchObject({ error: 'Duplicated email' });
   });
+
+  it('should be not be able to store a student when required data is missing', async () => {
+    const user = await factory.create('User');
+    const student = await factory.attrs('Student');
+
+    const response = await request(app)
+      .post(`/students`)
+      .set('Authorization', `Bearer ${user.generateToken()}`)
+      .send({
+        ...student,
+        name: '',
+        email: '',
+        age: undefined,
+        weight: undefined,
+        height: undefined,
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body.messages[0].message).toBe('name is a required field');
+    expect(response.body.messages[1].message).toBe('email is a required field');
+    expect(response.body.messages[2].message).toBe('age is a required field');
+    expect(response.body.messages[3].message).toBe(
+      'weight is a required field'
+    );
+    expect(response.body.messages[4].message).toBe(
+      'height is a required field'
+    );
+  });
 });
 
 describe('Update student', () => {
@@ -133,5 +161,33 @@ describe('Update student', () => {
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchObject({ error: 'Duplicated email' });
+  });
+
+  it('should be not be able to update a student when required data is missing', async () => {
+    const user = await factory.create('User');
+    const student = await factory.create('Student');
+
+    const response = await request(app)
+      .put(`/students/${student.dataValues.id}`)
+      .set('Authorization', `Bearer ${user.generateToken()}`)
+      .send({
+        ...student.dataValues,
+        name: '',
+        email: '',
+        age: undefined,
+        weight: undefined,
+        height: undefined,
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body.messages[0].message).toBe('name is a required field');
+    expect(response.body.messages[1].message).toBe('email is a required field');
+    expect(response.body.messages[2].message).toBe('age is a required field');
+    expect(response.body.messages[3].message).toBe(
+      'weight is a required field'
+    );
+    expect(response.body.messages[4].message).toBe(
+      'height is a required field'
+    );
   });
 });

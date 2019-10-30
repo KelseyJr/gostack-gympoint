@@ -31,4 +31,24 @@ describe('Create user', () => {
 
     expect(response.status).toBe(400);
   });
+
+  it('should not be able to register when required data is missing', async () => {
+    const user = await factory.attrs('User');
+
+    const response = await request(app)
+      .post('/users')
+      .send({
+        ...user,
+        name: '',
+        email: '',
+        password: '',
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body.messages[0].message).toBe('name is a required field');
+    expect(response.body.messages[1].message).toBe('email is a required field');
+    expect(response.body.messages[2].message).toBe(
+      'password is a required field'
+    );
+  });
 });
