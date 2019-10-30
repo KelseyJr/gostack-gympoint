@@ -1,7 +1,7 @@
 <h1 align="center">
   <img alt="Gympoint" title="Gympoint" src=".github/logo.png" width="200px" />
 </h1>
-<p align="center"><i>Image made by <a href="https://rocketseat.com.br/" target="_blank">Rocketseat</a></i></p>
+<p align="center"><i>Image made by <a href="https://rocketseat.com.br/">Rocketseat</a></i></p>
 
 # **GymPoint**
 GymPoint - App built to GoStack Bootcamp final challenge. :rocket:
