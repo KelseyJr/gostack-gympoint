@@ -5,6 +5,7 @@ import User from '../src/app/models/User';
 import Student from '../src/app/models/Student';
 import Plan from '../src/app/models/Plan';
 import Enrollment from '../src/app/models/Enrollment';
+import Checkin from '../src/app/models/Checkin';
 
 factory.define('User', User, {
   name: faker.name.findName(),
@@ -32,6 +33,10 @@ factory.define('Enrollment', Enrollment, {
   start_date: new Date(),
   end_date: new Date(),
   price: faker.random.number({ min: 1, max: 500, precision: 2 ** -1 }),
+});
+
+factory.define('Checkin', Checkin, {
+  student_id: faker.random.number({ min: 1 }),
 });
 
 export default factory;
