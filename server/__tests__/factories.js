@@ -4,6 +4,7 @@ import { factory } from 'factory-girl';
 import User from '../src/app/models/User';
 import Student from '../src/app/models/Student';
 import Plan from '../src/app/models/Plan';
+import Enrollment from '../src/app/models/Enrollment';
 
 factory.define('User', User, {
   name: faker.name.findName(),
@@ -21,7 +22,15 @@ factory.define('Student', Student, {
 
 factory.define('Plan', Plan, {
   title: faker.lorem.word(),
-  duration: faker.random.number({ min: 1 }),
+  duration: faker.random.number({ min: 1, max: 12 }),
+  price: faker.random.number({ min: 1, max: 150, precision: 2 ** -1 }),
+});
+
+factory.define('Enrollment', Enrollment, {
+  student_id: faker.random.number({ min: 1 }),
+  plan_id: faker.random.number({ min: 1 }),
+  start_date: new Date(),
+  end_date: new Date(),
   price: faker.random.number({ min: 1, max: 500, precision: 2 ** -1 }),
 });
 
