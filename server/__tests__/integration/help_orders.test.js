@@ -43,22 +43,48 @@ describe('Create help order', () => {
 
   it('should be able to create a help order with valid student', async () => {
     const student = await factory.create('Student');
+    const helpOrder = await factory.attrs('HelpOrder', {
+      student_id: student.dataValues.id,
+    });
 
-    const response = await request(app).post(
-      `/students/${student.dataValues.id}/help-orders`
-    );
+    const response = await request(app)
+      .post(`/students/${student.dataValues.id}/help-orders`)
+      .send(helpOrder);
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty('id');
+    expect(response.body.question).not.toBe(null);
   });
 
   it('should not be able to create a help order without valid student', async () => {
-    const response = await request(app).post(
-      `/students/56416845161/help-orders`
-    );
+    const student = await factory.create('Student');
+    const helpOrder = await factory.attrs('HelpOrder', {
+      student_id: student.dataValues.id,
+    });
+
+    const response = await request(app)
+      .post(`/students/56416845161/help-orders`)
+      .send(helpOrder);
 
     expect(response.status).toBe(400);
     expect(response.body).toMatchObject({ error: 'Student does not exists' });
+  });
+
+  it('should not be able to create a help order without question', async () => {
+    const student = await factory.create('Student');
+    const helpOrder = await factory.attrs('HelpOrder', {
+      student_id: student.dataValues.id,
+      question: undefined,
+    });
+
+    const response = await request(app)
+      .post(`/students/${student.dataValues.id}/help-orders`)
+      .send(helpOrder);
+
+    expect(response.status).toBe(400);
+    expect(response.body.messages[0].message).toBe(
+      'question is a required field'
+    );
   });
 });
 

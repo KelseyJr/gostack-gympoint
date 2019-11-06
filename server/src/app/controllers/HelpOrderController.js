@@ -41,9 +41,10 @@ class HelpOrderController {
     if (!student) {
       return res.status(400).json({ error: 'Student does not exists' });
     }
-
+    const { question } = req.body;
     const helpOrder = await HelpOrder.create({
       student_id,
+      question,
     });
 
     return res.json(helpOrder);

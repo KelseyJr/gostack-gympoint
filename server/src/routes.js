@@ -20,6 +20,7 @@ import validatePlanUpdate from './app/validators/Plan/PlanUpdate';
 import validateEnrollmentStore from './app/validators/Enrollment/EnrollmentStore';
 import validateEnrollmentUpdate from './app/validators/Enrollment/EnrollmentUpdate';
 import validateAnswerStore from './app/validators/AnswerStore';
+import validateHelpOrderStore from './app/validators/HelpOrderStore';
 
 const routes = new Router();
 
@@ -29,7 +30,11 @@ routes.post('/sessions', validateSessionStore, SessionController.store);
 routes.get('/students/:student_id/checkins', CheckinController.index);
 routes.post('/students/:student_id/checkins', CheckinController.store);
 
-routes.post('/students/:student_id/help-orders', HelpOrderController.store);
+routes.post(
+  '/students/:student_id/help-orders',
+  validateHelpOrderStore,
+  HelpOrderController.store
+);
 
 routes.use(authMiddleware);
 routes.post('/students', validateStudentStore, StudentController.store);

@@ -42,6 +42,7 @@ factory.define('Checkin', Checkin, {
 
 factory.define('HelpOrder', HelpOrder, {
   student_id: faker.random.number({ min: 1 }),
+  question: faker.lorem.word(),
 });
 
 export default factory;
