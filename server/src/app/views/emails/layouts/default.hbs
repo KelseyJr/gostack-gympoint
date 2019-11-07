@@ -1,4 +1,48 @@
-<div style="font-family: Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.6; color: #222; max-width: 600px;">
-  {{{ body }}}
-  {{> footer}}
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      background: #000;
+      font-size: 16px;
+    }
+    h2, h3, p {
+      color: #FFF;
+    }
+    .container {
+      padding: 15px;
+      margin: 10px;
+      line-height: 1.6;
+    }
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .content {
+      margin: 10px;
+      padding: 10px;
+    }
+    footer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    {{> header}}
+    {{{ body }}}
+    {{> footer}}
+  </div>
+</body>
+</html>

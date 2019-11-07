@@ -1,11 +1,12 @@
-<strong>Olá, {{ student_name }}</strong>
-<p>Seja bem vindo ao GymPoint, confira os detalhes abaixo:</p>
-<p>
-  <strong>Plano: </strong> {{ plan_name }} <br />
-  <strong>Preço: </strong> R${{ price }} <br />
-  <strong>Duração: </strong> de {{ start_date }} até {{ end_date }} <br />
-  <br />
+<div class="content">
+  <h2>Olá {{ student_name }},</h2>
+  <p>Seja bem vindo ao GymPoint, confira os detalhes da matrícula abaixo:</p>
   <p>
-    Espero que faço um aproveito.
+    <strong>Plano: </strong> {{ plan_name }} <br />
+    <strong>Preço: </strong> R${{ price }} <br />
+    <strong>Duração: </strong> de {{ start_date }} até {{ end_date }} <br />
+    <p>
+      Espero que faço um aproveito.
+    </p>
   </p>
-</p>
+</div>
